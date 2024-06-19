@@ -25,4 +25,17 @@ public class BoardRepository {
                 .getResultList();
     }
 
+    public Board findById(Long id) {
+        return em.createQuery("select b from Board b where b.id = :id", Board.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    /** 삭제 **/
+    public void remove(Long id) {
+        em.createQuery("delete from Board b where b.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
 }

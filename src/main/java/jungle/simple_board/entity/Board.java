@@ -2,7 +2,6 @@ package jungle.simple_board.entity;
 
 import jakarta.persistence.*;
 import jungle.simple_board.dto.BoardDto;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,6 +31,12 @@ public class Board {
     public Board(String title, String content) {
         this.title = title;
         this.content = content;
+        this.date = LocalDateTime.now();
+    }
 
+    public void updateBoard(BoardDto boardDto) {
+        this.title = boardDto.getTitle();
+        this.content = boardDto.getContent();
+        this.date = LocalDateTime.now();
     }
 }
