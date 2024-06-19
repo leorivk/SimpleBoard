@@ -4,11 +4,13 @@ import jungle.simple_board.dto.MemberDto;
 import jungle.simple_board.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class MemberApiController {
 
     private final MemberService memberService;

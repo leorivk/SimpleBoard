@@ -20,10 +20,10 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final CommentRepository commentRepository;
 
-    public Long create(BoardDto boardDto) {
+    public Board create(BoardDto boardDto) {
         Board board = boardDto.ToEntity();
         boardRepository.save(board);
-        return board.getId();
+        return board;
     }
 
     public List<Board> findAllBoards() {

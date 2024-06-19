@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class BoardApiController {
 
     private final BoardService boardService;
@@ -23,17 +24,23 @@ public class BoardApiController {
     }
 
     @PostMapping("/board")
-    public Long createBoard(@RequestBody BoardDto boardDto) {
+    public Board createBoard(@RequestBody BoardDto boardDto) {
         return boardService.create(boardDto);
     }
 
     @GetMapping("/board/{boardId}")
+    public BoardDto showBoard(@PathVariable("boardId") Long id) {
+        Board board = boardService.findBoardById(id);
+        return new BoardDto(board);
+    }
+
+    @GetMapping("/board/update/{boardId}")
     public BoardDto updateBoard(@PathVariable("boardId") Long id) {
         Board board = boardService.findBoardById(id);
         return new BoardDto(board);
     }
 
-    @PutMapping("/board/{boardId}")
+    @PutMapping("/board/update/{boardId}")
     public void updateBoard(
             @PathVariable("boardId") Long id,
             @RequestBody BoardDto boardDto) {
