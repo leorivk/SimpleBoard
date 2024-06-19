@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>게시글 작성</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>게시글 작성</h1>
+<form action="#" th:action="@{/templates/board}" th:object="${board}" method="post">
+    <div>
+        <label for="title">제목:</label>
+        <input type="text" id="title" th:field="*{board.title}">
+    </div>
+    <div>
+        <label for="content">내용:</label>
+        <textarea id="content" th:field="*{board.content}"></textarea>
+    </div>
+    <div>
+        <label for="date">작성일:</label>
+        <input type="datetime-local" id="date" th:field="*{board.date}">
+    </div>
+    <div>
+        <label for="user">작성자:</label>
+        <input type="text" id="user" th:field="*{user.name}">
+    </div>
+    <button type="submit">저장</button>
+</form>
+</body>
+</html>
