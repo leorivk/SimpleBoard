@@ -31,6 +31,10 @@ public class MemberApiController {
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         Member member = memberService.login(loginRequest);
 
+        if (member == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail");
+        }
+
         Cookie cookie = new Cookie("id", member.getId().toString());
         cookie.setHttpOnly(true);
         cookie.setPath("/");

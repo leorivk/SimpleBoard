@@ -5,6 +5,7 @@ import jungle.simple_board.dto.LoginRequest;
 import jungle.simple_board.entity.Member;
 import jungle.simple_board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
@@ -46,8 +47,9 @@ public class MemberService {
         }
 
         Member member = optionalMember.get();
+        String password = member.getPassword();
 
-        if (!member.getPassword().equals(request.getPassword())) {
+        if (!checkPassword(request.getPassword(), password)) {
             return null;
         }
 
@@ -72,5 +74,12 @@ public class MemberService {
 
         Optional<Member> optionalMember = memberRepository.findByLoginId(loginId);
         return optionalMember.orElse(null);
+    }
+
+    /**
+     * 비밀번호 검증
+     */
+    public static boolean checkPassword(String plainTextPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainTextPassword, hashedPassword);
     }
 }

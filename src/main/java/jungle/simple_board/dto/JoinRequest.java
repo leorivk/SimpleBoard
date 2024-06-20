@@ -3,9 +3,11 @@ package jungle.simple_board.dto;
 import jungle.simple_board.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
-import org.antlr.v4.runtime.misc.NotNull;
+import org.mindrot.jbcrypt.BCrypt;
+
+
+import static org.mindrot.jbcrypt.BCrypt.hashpw;
 
 @Getter
 @Setter
@@ -18,11 +20,18 @@ public class JoinRequest {
 
     private String name;
 
+    /**
+     * 비밀번호 해시
+     */
+    public static String hashPassword(String plainTextPassword) {
+        return hashpw(plainTextPassword, BCrypt.gensalt());
+    }
+
     /* 비밀번호 암호화 */
     public Member ToEntity() {
         return Member.builder()
                 .loginId(this.loginId)
-                .password(this.password)
+                .password(hashPassword(this.password))
                 .name(this.name)
                 .build();
     }
