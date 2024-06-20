@@ -18,5 +18,8 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+  jwt:
+    secret: ea2faee75e657713b9daaa1712ad84ad0292a227bf9e4f3dc1ebaa3a131b4f3b
 logging.level:
   org.hibernate.SQL: debug
+  org.hibernate.orm.jdbc.bind: trace

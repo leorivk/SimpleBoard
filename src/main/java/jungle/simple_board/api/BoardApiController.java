@@ -15,7 +15,7 @@ public class BoardApiController {
 
     private final BoardService boardService;
 
-    @GetMapping("/")
+    @GetMapping("/board")
     public List<BoardDto> boards() {
         List<Board> boards = boardService.findAllBoards();
         return boards.stream()

@@ -7,6 +7,7 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -17,11 +18,13 @@ import static lombok.AccessLevel.PROTECTED;
 @AllArgsConstructor
 public class Member {
 
-    @Id @GeneratedValue(strategy = SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
+    @Id @GeneratedValue(strategy = IDENTITY, generator = "MEMBER_SEQ_GENERATOR")
     @SequenceGenerator(name = "MEMBER_SEQ_GENERATOR", sequenceName = "MEMBER_SEQ", allocationSize = 1)
     @Column(name = "member_id")
     private Long id;
 
+    private String loginId;
+    private String password;
     private String name;
 
     @OneToMany(mappedBy = "member")
